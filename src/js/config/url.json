@@ -1,0 +1,11 @@
+{
+  "GET_TASKS_URL": "http://localhost:5000/alltasks?user_id=1",
+  "GET_SHOP_ITEMS_URL": "http://localhost:5000/getshopitem?user=1",
+  "BUY_SHOP_ITEMS_URL": "http://localhost:5000/getinventory?user=1",
+  "GET_INVENTORY_URL": "http://localhost:5000/getinventory?user=1",
+  "LOGIN_URL": "http://localhost:5000/login",
+  "TWIZO_URL": "http://localhost:5000/twizo",
+  "PROTECTED_URL": "http://localhost:5000/protected",
+  "GET_USER_URL": "http://localhost:5000/user",
+  "CODE_VERIFICATION_URL": "http://localhost:5000/applycode"
+}

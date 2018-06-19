@@ -1,0 +1,25 @@
+@import '~antd/dist/antd.css';
+
+html,
+body {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family: sans-serif;
+}
+
+a,
+a:active,
+a:focus {
+  outline: none;
+  text-decoration: none;
+}
+
+.ant-card-head-title,
+.ant-steps-item-title,
+h1 {
+  font-family: Berkshire Swash, cursive;
+}
