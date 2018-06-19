@@ -5,6 +5,7 @@ import { Link } from 'react-router-dom'
 import { Layout, Menu, Icon, Button } from 'antd'
 import withMainAction from '../components/container/withMainAction'
 import { postAxios } from '../helpers/tokenHelper'
+import { LOGOUT_URL } from '../config/url'
 
 const { Header, Content, Footer, Sider } = Layout
 
@@ -55,7 +56,7 @@ class Main extends React.Component {
   }
 
   logOut = () => {
-    postAxios('http://localhost:5000/logout')
+    postAxios(LOGOUT_URL)
       .then(this.props.logout)
       .catch(this.props.logout)
   }
