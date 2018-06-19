@@ -1,5 +1,5 @@
-const BASE = 'http://localhost:5000'
-// const BASE = 'https://park-and-dragon.herokuapp.com'
+// const BASE = 'http://localhost:5000'
+const BASE = 'https://park-and-dragon.herokuapp.com'
 
 export const GET_TASKS_URL = BASE + '/alltasks?user_id=1'
 export const GET_SHOP_ITEMS_URL = BASE + '/getshopitem?user=1'

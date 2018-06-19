@@ -1,10 +1,12 @@
 {
   "name": "front_end",
   "version": "0.1.0",
+  "homepage": "https://jun13blu.github.io/pnd",
   "private": true,
   "dependencies": {
     "antd": "^3.4.4",
     "axios": "^0.18.0",
+    "gh-pages": "^1.2.0",
     "immutable": "^3.8.2",
     "npm-run-all": "^4.1.2",
     "react": "^16.3.2",
@@ -23,10 +25,10 @@
     "build": "npm-run-all build-css build-js",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject",
-    "build-css":
-      "node-less-chokidar --include-path ./src --include-path ./node_modules src/ -o src/",
-    "watch-css":
-      "yarn run build-css && node-less-chokidar --include-path ./src --include-path ./node_modules src/ -o src/ --watch --recursive"
+    "build-css": "node-less-chokidar --include-path ./src --include-path ./node_modules src/ -o src/",
+    "watch-css": "yarn run build-css && node-less-chokidar --include-path ./src --include-path ./node_modules src/ -o src/ --watch --recursive",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build"
   },
   "devDependencies": {
     "node-less-chokidar": "^0.1.2"
