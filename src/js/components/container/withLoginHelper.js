@@ -1,7 +1,6 @@
 import React from 'react'
 import {
   loginAttempt,
-  twizoVerification,
   storeJWT,
   verifyJWT
 } from '../../helpers/LoginHelper'
@@ -13,7 +12,6 @@ const withLoginHelper = Component =>
         <Component
           {...this.props}
           loginAttempt={loginAttempt}
-          twizoVerification={twizoVerification}
           storeJWT={storeJWT}
           verifyJWT={verifyJWT}
         />

@@ -39,8 +39,13 @@ class Login extends React.Component {
 
   loginOnClick = async () => {
     const { emailAddress, password } = this.state
-    const messageId = await this.props.loginAttempt(emailAddress, password)
-    this.setState({ messageId, twizoWait: true })
+    const login = await this.props.loginAttempt(emailAddress, password)
+    if (login) {
+      this.props.loginSuccess(emailAddress)
+    }
+    else {
+      this.loginFail()
+    }
   }
 
   loginFail = () => {
@@ -69,82 +74,56 @@ class Login extends React.Component {
               </Col>
             </Row>
             <Row>
-              {this.state.twizoWait ? (
-                <Form className="login-form">
-                  <FormItem label="Verification Token">
-                    <Input
-                      placeholder="Enter your verification token here"
-                      value={this.state.code}
-                      onChange={e => this.setState({ code: e.target.value })}
-                    />
-                  </FormItem>
-                  <Button
-                    onClick={() =>
-                      this.props.twizoVerification(
-                        this.state.messageId,
-                        this.state.emailAddress,
-                        this.state.code,
-                        () => this.props.loginSuccess(this.state.emailAddress),
-                        this.loginFail
-                      )
-                    }
-                    type="primary"
-                    className="login-form-button"
-                    style={{ width: '100%' }}
-                  >
-                    OK
-                  </Button>
-                </Form>
-              ) : (
-                <Form className="login-form">
-                  {config &&
-                    config.informations.map((item, index) => (
-                      <FormItem label={item.label} key={index}>
-                        <Input
-                          prefix={
-                            <Icon
-                              type={item.icon}
-                              style={{ color: item.color }}
-                            />
-                          }
-                          placeholder={item.label}
-                          value={this.state[item.stateName]}
-                          onChange={e => this.inputOnChange(item, e)}
-                          {...item.props}
-                        />
-                      </FormItem>
-                    ))}
-                  <FormItem>
-                    <Row>
-                      <Col span={12}>
-                        <Checkbox>Remember me</Checkbox>
-                      </Col>
-                      <Col span={12} style={{ textAlign: 'right' }}>
-                        <a className="login-form-forgot" href="">
-                          Forgot password
+
+              <Form className="login-form">
+                {config &&
+                  config.informations.map((item, index) => (
+                    <FormItem label={item.label} key={index}>
+                      <Input
+                        prefix={
+                          <Icon
+                            type={item.icon}
+                            style={{ color: item.color }}
+                          />
+                        }
+                        placeholder={item.label}
+                        value={this.state[item.stateName]}
+                        onChange={e => this.inputOnChange(item, e)}
+                        {...item.props}
+                      />
+                    </FormItem>
+                  ))}
+                <FormItem>
+                  <Row>
+                    <Col span={12}>
+                      <Checkbox>Remember me</Checkbox>
+                    </Col>
+                    <Col span={12} style={{ textAlign: 'right' }}>
+                      <a className="login-form-forgot" href="">
+                        Forgot password
                         </a>
-                      </Col>
-                    </Row>
-                    <Row>
-                      <Button
-                        type="primary"
-                        className="login-form-button"
-                        style={{ width: '100%' }}
-                        disabled={!this.validateFormData()}
-                        onClick={this.loginOnClick}
-                      >
-                        Log in
+                    </Col>
+                  </Row>
+                  <Row>
+                    <Button
+                      type="primary"
+                      className="login-form-button"
+                      style={{ width: '100%' }}
+                      disabled={!this.validateFormData()}
+                      onClick={this.loginOnClick}
+                    >
+                      Log in
                       </Button>
-                    </Row>
-                    <Row>
-                      Or
+                  </Row>
+                  <Row>
+                    Or
                       <Link to={'/register'}>
-                        <span> register now!</span>
-                      </Link>
-                    </Row>
-                  </FormItem>
-                </Form>
-              )}
+                      <span> register now!</span>
+                    </Link>
+                  </Row>
+                </FormItem>
+              </Form>
+
             </Row>
           </Card>
         </Col>

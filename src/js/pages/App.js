@@ -21,7 +21,7 @@ const store = createStore(reducers)
 
 export default class App extends Component {
   state = {
-    login: true,
+    login: false,
     email: 'leonweecs@gmail.com'
   }
 
@@ -34,22 +34,46 @@ export default class App extends Component {
     return (
       <Provider store={store}>
         <BrowserRouter>
-          <Main
-            config={mainConfig}
-            email={this.state.email}
-            logout={this.logout}
-          >
-            <Switch>
-              <Route exact path="/pnd/home" render={() => <Home />} />
-              <Route exact path="/pnd/canvas" render={() => <Canvas />} />
-              <Route exact path="/pnd/tasks" render={() => <Tasks />} />
-              <Route exact path="/pnd/inventory" render={() => <Inventory />} />
-              <Route exact path="/pnd/shop" render={() => <Shop />} />
-              <Route exact path="/pnd/user" render={() => <User />} />
-              <Redirect to="/pnd/home" />
-            </Switch>
-          </Main>
-
+          {login ? (
+            <Main
+              config={mainConfig}
+              email={this.state.email}
+              logout={this.logout}
+            >
+              <Switch>
+                <Route exact path="/pnd/home" render={() => <Home />} />
+                <Route exact path="/pnd/canvas" render={() => <Canvas />} />
+                <Route exact path="/pnd/tasks" render={() => <Tasks />} />
+                <Route exact path="/pnd/inventory" render={() => <Inventory />} />
+                <Route exact path="/pnd/shop" render={() => <Shop />} />
+                <Route exact path="/pnd/user" render={() => <User />} />
+                <Redirect to="/pnd/home" />
+              </Switch>
+            </Main>
+          ) : (
+              <Blank config={blankConfig}>
+                <Switch>
+                  <Route
+                    exact
+                    path="/pnd/login"
+                    render={() => (
+                      <Login
+                        email={this.state.email}
+                        loginSuccess={this.loginSuccess}
+                        config={loginConfig}
+                      />
+                    )}
+                  />
+                  <Route
+                    exact
+                    path="/pnd/register"
+                    render={() => <Register config={registerConfig} />}
+                  />
+                  <Route exact path="/pnd/code" render={() => <Code />} />
+                  <Redirect to="/pnd/login" />
+                </Switch>
+              </Blank>
+            )}
         </BrowserRouter>
       </Provider>
     )

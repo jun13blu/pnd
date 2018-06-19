@@ -4,26 +4,11 @@ import { LOGIN_URL, TWIZO_URL, PROTECTED_URL } from '../config/url.js'
 export const loginAttempt = async (email, password) => {
   try {
     const res = await axios.post(LOGIN_URL, { email, password })
-    return res.data.credentials[0]
+    storeJWT(res.data.access_token)
+    return true
   } catch (err) {
     console.log(err)
     return false
-  }
-}
-
-export const twizoVerification = async (
-  key,
-  email,
-  token,
-  loginSuccess,
-  loginFail
-) => {
-  try {
-    const res = await axios.post(TWIZO_URL, { messageId: key, email, token })
-    storeJWT(res.data.access_token)
-    loginSuccess()
-  } catch (err) {
-    loginFail()
   }
 }
 
