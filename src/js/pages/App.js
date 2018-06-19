@@ -21,7 +21,7 @@ const store = createStore(reducers)
 
 export default class App extends Component {
   state = {
-    login: false,
+    login: true,
     email: 'leonweecs@gmail.com'
   }
 
@@ -34,46 +34,22 @@ export default class App extends Component {
     return (
       <Provider store={store}>
         <BrowserRouter>
-          {login ? (
-            <Main
-              config={mainConfig}
-              email={this.state.email}
-              logout={this.logout}
-            >
-              <Switch>
-                <Route exact path="/home" render={() => <Home />} />
-                <Route exact path="/canvas" render={() => <Canvas />} />
-                <Route exact path="/tasks" render={() => <Tasks />} />
-                <Route exact path="/inventory" render={() => <Inventory />} />
-                <Route exact path="/shop" render={() => <Shop />} />
-                <Route exact path="/user" render={() => <User />} />
-                <Redirect to="/home" />
-              </Switch>
-            </Main>
-          ) : (
-            <Blank config={blankConfig}>
-              <Switch>
-                <Route
-                  exact
-                  path="/login"
-                  render={() => (
-                    <Login
-                      email={this.state.email}
-                      loginSuccess={this.loginSuccess}
-                      config={loginConfig}
-                    />
-                  )}
-                />
-                <Route
-                  exact
-                  path="/register"
-                  render={() => <Register config={registerConfig} />}
-                />
-                <Route exact path="/code" render={() => <Code />} />
-                <Redirect to="/login" />
-              </Switch>
-            </Blank>
-          )}
+          <Main
+            config={mainConfig}
+            email={this.state.email}
+            logout={this.logout}
+          >
+            <Switch>
+              <Route exact path="/pnd/home" render={() => <Home />} />
+              <Route exact path="/pnd/canvas" render={() => <Canvas />} />
+              <Route exact path="/pnd/tasks" render={() => <Tasks />} />
+              <Route exact path="/pnd/inventory" render={() => <Inventory />} />
+              <Route exact path="/pnd/shop" render={() => <Shop />} />
+              <Route exact path="/pnd/user" render={() => <User />} />
+              <Redirect to="/pnd/home" />
+            </Switch>
+          </Main>
+
         </BrowserRouter>
       </Provider>
     )

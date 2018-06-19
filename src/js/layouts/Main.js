@@ -80,7 +80,7 @@ class Main extends React.Component {
           >
             {sider.item.map(item => (
               <Menu.Item key={item.key}>
-                <Link to={`/${item.key}`}>
+                <Link to={`/pnd/${item.key}`}>
                   <Icon type={item.icon} />
                   <span>{item.description}</span>
                 </Link>
